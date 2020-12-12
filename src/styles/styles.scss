@@ -36,6 +36,10 @@ body {
     animation: scaling 400ms;
   }
 }
+.class-disabled {
+  pointer-events:none,
+}
+
 @keyframes scaling {
   0% {
     transform: scale(1.2);
