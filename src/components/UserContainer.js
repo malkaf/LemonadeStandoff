@@ -5,7 +5,8 @@ import {
   play,
   selectDrawedCards,
   selectDeckSize,
-  newRound,
+  selectFinishedDrawing,
+  selectPlayedCard
 } from "../redux/gameStore";
 import PlayerArea from "./PlayerArea";
 import { CardOrientation, PLAYER_TWO } from "../constants";
@@ -15,6 +16,10 @@ const UserContainer = () => {
   const handCards = useSelector((state) =>
     selectDrawedCards(state, PLAYER_TWO)
   );
+  const isFinishedDrawing = useSelector((state) =>
+    selectFinishedDrawing(state, PLAYER_TWO)
+  );
+  const isCardPlayed = useSelector((state)=> selectPlayedCard(state, PLAYER_TWO))
   const deckSize = useSelector((state) => selectDeckSize(state, PLAYER_TWO));
 
   return (
@@ -23,7 +28,11 @@ const UserContainer = () => {
       handCards={handCards}
       cardOrientation={CardOrientation.UP}
       onClickDeck={() => dispatch(draw({ player: PLAYER_TWO }))}
-      onClickHand={(value) => dispatch(play({ cardId: value, player: PLAYER_TWO }))}
+      onClickHand={(value) =>
+        dispatch(play({ cardId: value, player: PLAYER_TWO }))
+      }
+      disableDeck={isFinishedDrawing}
+      disableHand={isCardPlayed}
     />
   );
 };

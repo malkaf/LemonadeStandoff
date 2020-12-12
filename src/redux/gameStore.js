@@ -16,9 +16,15 @@ function getInitialState() {
       [PLAYER_ONE]: [],
       [PLAYER_TWO]: [],
     },
-    standoffAreaCard: {
+    standoffAreaCard: {},
+    finishedDrawing: {
+      [PLAYER_ONE]: false,
+      [PLAYER_TWO]: false,
     },
-    gameStage:{},
+    playedCard: {
+      [PLAYER_ONE]: false,
+      [PLAYER_TWO]: false,
+    },
     newRound: true,
   };
 }
@@ -29,20 +35,27 @@ const gameManagerSlice = createSlice({
   reducers: {
     draw(state, action) {
       const { player } = action.payload;
-      state.newRound = false
-      if (state.deck[player].length && state.drawedCards[player].length < 3) {
+      state.newRound = false;
+      if (state.deck[player].length) {
         state.drawedCards[player].push(state.deck[player].pop());
       }
+      if(state.drawedCards[player].length === 3)
+      {
+        state.finishedDrawing[player] = true
+      }
+       
     },
     play(state, action) {
       const { player, cardId } = action.payload;
+      state.finishedDrawing[player] = true
+      state.playedCard[player] = true
       state.standoffAreaCard[player] = cardId;
       state.drawedCards[player] = state.drawedCards[player].filter(
         (value) => value !== cardId
       );
     },
     roundWinnner(state) {
-      const winnerCard = Math.max(...Object.values(state.standoffAreaCard))
+      const winnerCard = Math.max(...Object.values(state.standoffAreaCard));
       state.newRound = true;
     },
     reset: () => getInitialState(),
@@ -61,6 +74,10 @@ export const {
 export const selectDrawedCards = (state, player) => state.drawedCards[player];
 
 export const selectDeckSize = (state, player) => state.deck[player].length;
+
+export const selectFinishedDrawing = (state, player) => state.finishedDrawing[player]
+
+export const selectPlayedCard = (state, player) => state.playedCard[player]
 
 export const selectNewRound = (state) => state.newRound;
 

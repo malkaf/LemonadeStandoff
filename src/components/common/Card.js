@@ -31,12 +31,14 @@ const useStyles = makeStyles((theme) => {
 });
 
 const CardContanier = (props) => {
-  const { cardOrientation, value, showShadow = true, style, onClick } = props;
+  const { cardOrientation, value, showShadow = true, style, onClick, disable } = props;
   const classes = useStyles();
 
   return (
     <Card
+      data-testid='card'
       style={style}
+      disabled={true}
       onClick={() => onClick?.(value)}
       className={classNames(classes[cardOrientation], classes.root, {
         "class-card-shadow": showShadow,
