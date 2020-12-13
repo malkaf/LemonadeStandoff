@@ -2,7 +2,7 @@ import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import Card from './Card';
 
-props = {
+const props = {
     cardOrientation: 'faceUp',
     value: 5,
     onClick: jest.fn()
@@ -25,7 +25,6 @@ describe('<Card />', () => {
 
     })
 }) 
-
 /*
 import React from 'react';
 import { render, fireEvent } from '@testUtils';

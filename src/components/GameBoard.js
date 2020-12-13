@@ -32,7 +32,7 @@ export default function GameBoard() {
         endOfGame(`${PLAYER_ONE} WON!`);
       }
     }
-  }, [newRound, deckSizePlayerOne, deckSizePlayerTwo]);
+  }, [newRound, deckSizePlayerOne, deckSizePlayerTwo, dispatch]);
   return (
     <>
       <AIContanier />

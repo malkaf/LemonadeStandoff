@@ -31,7 +31,7 @@ body {
 }
 
 .class-min-height {
-  min-height: 200px;
+  min-height: 200px !important;
 }
 
 .deck-shadow:nth-child(1) {
@@ -87,6 +87,7 @@ body {
 
 .standoff-area-card-wrapper {
   display: flex;
+  @extend .class-gap;
 }
 
 .standoff-area-text-wrapper {

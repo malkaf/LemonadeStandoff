@@ -37,9 +37,7 @@ const gameManagerSlice = createSlice({
     draw(state, action) {
       const { player } = action.payload;
       state.newRound = false;
-      if (state.deck[player].length) {
-        state.drawedCards[player].push(state.deck[player].pop());
-      }
+      state.drawedCards[player].push(state.deck[player].pop());
       if (state.drawedCards[player].length === 3) {
         state.finishedDrawing[player] = true;
       }
@@ -57,20 +55,20 @@ const gameManagerSlice = createSlice({
       state.isWarTime = true;
     },
     roundWinnner(state) {
-      const winnerCard = Math.max(...Object.values(state.standoffAreaCard));
+      const standoffAreaCardsValue = Object.values(state.standoffAreaCard)
+      const winnerCard = Math.max(...standoffAreaCardsValue);
       const roundWinner = Object.keys(state.standoffAreaCard).find(
         (key) => state.standoffAreaCard[key] === winnerCard
       );
       Object.values(state.drawedCards).forEach((cardGroup) =>
         state.deck[roundWinner].push(...cardGroup)
       );
-      state.deck[roundWinner].push(...Object.values(state.standoffAreaCard));
+      state.deck[roundWinner].push(...standoffAreaCardsValue);
       state.drawedCards[PLAYER_ONE] = [];
       state.drawedCards[PLAYER_TWO] = [];
       state.standoffAreaCard = {};
       state.deck[roundWinner] = shuffle(state.deck[roundWinner]);
     },
-    reset: () => getInitialState(),
     newRoundSetUp(state) {
       state.finishedDrawing[PLAYER_ONE] = false;
       state.finishedDrawing[PLAYER_TWO] = false;
@@ -79,6 +77,7 @@ const gameManagerSlice = createSlice({
       state.isWarTime = false;
       state.newRound = true;
     },
+    reset: () => getInitialState(),
   },
 });
 
@@ -86,9 +85,9 @@ export const {
   draw,
   play,
   setWarTime,
-  reset,
   roundWinnner,
   newRoundSetUp,
+  reset,
 } = gameManagerSlice.actions;
 
 export const selectDrawedCards = (state, player) => state.drawedCards[player];

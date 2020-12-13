@@ -24,7 +24,7 @@ const StandoffAreaContainer = () => {
         dispatch(newRoundSetUp());
       }, 1000);
     }
-  }, [standoffCards]);
+  }, [standoffCards, dispatch]);
 
   return (
     <StandoffArea

@@ -23,7 +23,7 @@ const AIContainer = () => {
       setTimeout(() => dispatch(draw({ player: PLAYER_ONE })), 500);
       setTimeout(() => dispatch(draw({ player: PLAYER_ONE })), 1000);
     }
-  }, [newRound]);
+  }, [newRound, dispatch]);
 
   useEffect(() => {
     if (handCards.length === 2)
@@ -34,9 +34,16 @@ const AIContainer = () => {
           ),
         500
       );
-  }, [handCards]);
+  }, [handCards, dispatch]);
 
-  return <PlayerArea deckSize={deckSize} handCards={handCards} />;
+  return (
+    <PlayerArea
+      deckSize={deckSize}
+      handCards={handCards}
+      disableDeck={true}
+      disableHand={true}
+    />
+  );
 };
 
 export default AIContainer;

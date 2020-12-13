@@ -12,6 +12,7 @@ const useStyles = makeStyles((theme) => {
     root: {
       borderRadius: "6px",
       boxSizing: "border-box",
+      cursor: "pointer",
     },
     [CardOrientation.UP]: {
       display: "flex",
