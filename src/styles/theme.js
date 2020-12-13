@@ -12,11 +12,6 @@ export default createMuiTheme({
       },
     },
   },
-  MuiCardContent: {
-    root: {
-        
-    },
-  },
   palette: {
     primary: {
       main: PRIMARY_COLOR,
