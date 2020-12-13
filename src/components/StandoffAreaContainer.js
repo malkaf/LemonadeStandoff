@@ -2,26 +2,38 @@ import React, { useEffect } from "react";
 import StandoffArea from "./StandoffArea";
 import { CardOrientation } from "../constants";
 import { useDispatch, useSelector } from "react-redux";
-import {roundWinnner,selectstandoffAreaCard,} from "../redux/gameStore";
-import PlayerArea from "./PlayerArea";
-import { PLAYER_ONE } from "../constants";
+import {
+  roundWinnner,
+  newRoundSetUp,
+  setWarTime,
+  selectStandoffAreaCard,
+  selectIsWarTime,
+
+} from "../redux/gameStore";
 import "../styles/styles.scss";
 
 const StandoffAreaContainer = () => {
   const dispatch = useDispatch();
-  const standoffCards = useSelector(selectstandoffAreaCard);
+  const standoffCards = useSelector(selectStandoffAreaCard);
+  const isWarTime = useSelector(selectIsWarTime);
 
   useEffect(() => {
-    if (standoffCards.length === 2) {
-        dispatch(roundWinnner())
+    if (Object.keys(standoffCards).length === 2) {
+      dispatch(setWarTime())
+      setTimeout(() => {
+        dispatch(roundWinnner());
+        dispatch(newRoundSetUp());
+      }, 1000);
     }
   }, [standoffCards]);
 
   return (
     <StandoffArea
-      standoffCardsValue={Object.keys(standoffCards).map(name => standoffCards[name])}
+      standoffCardsValue={Object.keys(standoffCards).map(
+        (name) => standoffCards[name]
+      )}
       playersName={Object.keys(standoffCards)}
-      CardOrientation = {CardOrientation.DOWN}
+      cardOrientation={isWarTime ? CardOrientation.UP : CardOrientation.DOWN}
     />
   );
 };

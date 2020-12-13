@@ -25,6 +25,7 @@ function getInitialState() {
       [PLAYER_ONE]: false,
       [PLAYER_TWO]: false,
     },
+    isWarTime: false,
     newRound: true,
   };
 }
@@ -39,33 +40,52 @@ const gameManagerSlice = createSlice({
       if (state.deck[player].length) {
         state.drawedCards[player].push(state.deck[player].pop());
       }
-      if(state.drawedCards[player].length === 3)
-      {
-        state.finishedDrawing[player] = true
+      if (state.drawedCards[player].length === 3) {
+        state.finishedDrawing[player] = true;
       }
-       
     },
     play(state, action) {
       const { player, cardId } = action.payload;
-      state.finishedDrawing[player] = true
-      state.playedCard[player] = true
+      state.finishedDrawing[player] = true;
+      state.playedCard[player] = true;
       state.standoffAreaCard[player] = cardId;
       state.drawedCards[player] = state.drawedCards[player].filter(
         (value) => value !== cardId
       );
     },
+    setWarTime(state) {
+      state.isWarTime = true;
+    },
     roundWinnner(state) {
       const winnerCard = Math.max(...Object.values(state.standoffAreaCard));
-      state.newRound = true;
+      const roundWinner = Object.keys(state.standoffAreaCard).find(
+        (key) => state.standoffAreaCard[key] === winnerCard
+      );
+      Object.values(state.drawedCards).forEach((cardGroup) =>
+        state.deck[roundWinner].push(...cardGroup)
+      );
+      state.deck[roundWinner].push(...Object.values(state.standoffAreaCard));
+      state.deck[roundWinner] = shuffle(state.deck[roundWinner]);
     },
     reset: () => getInitialState(),
-    newRoundSetUp(state, action) {},
+    newRoundSetUp(state) {
+      state.finishedDrawing[PLAYER_ONE] = false;
+      state.finishedDrawing[PLAYER_TWO] = false;
+      state.playedCard[PLAYER_ONE] = false;
+      state.playedCard[PLAYER_TWO] = false;
+      state.drawedCards[PLAYER_ONE] = [];
+      state.drawedCards[PLAYER_TWO] = [];
+      state.standoffAreaCard = {};
+      state.isWarTime = false;
+      state.newRound = true;
+    },
   },
 });
 
 export const {
   draw,
   play,
+  setWarTime,
   reset,
   roundWinnner,
   newRoundSetUp,
@@ -75,12 +95,15 @@ export const selectDrawedCards = (state, player) => state.drawedCards[player];
 
 export const selectDeckSize = (state, player) => state.deck[player].length;
 
-export const selectFinishedDrawing = (state, player) => state.finishedDrawing[player]
+export const selectFinishedDrawing = (state, player) =>
+  state.finishedDrawing[player];
 
-export const selectPlayedCard = (state, player) => state.playedCard[player]
+export const selectPlayedCard = (state, player) => state.playedCard[player];
 
 export const selectNewRound = (state) => state.newRound;
 
-export const selectstandoffAreaCard = (state) => state.standoffAreaCard;
+export const selectStandoffAreaCard = (state) => state.standoffAreaCard;
+
+export const selectIsWarTime = (state) => state.isWarTime
 
 export default gameManagerSlice.reducer;
