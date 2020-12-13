@@ -37,7 +37,7 @@ const gameManagerSlice = createSlice({
     draw(state, action) {
       const { player } = action.payload;
       state.newRound = false;
-      const decksTopMustCard =state.deck[player].pop();
+      const decksTopMustCard = state.deck[player].pop();
       state.drawedCards[player].push(decksTopMustCard);
       if (state.drawedCards[player].length === 3) {
         state.finishedDrawing[player] = true;

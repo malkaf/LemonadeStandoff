@@ -1,5 +1,5 @@
 import React from "react";
-import LemonadeStandoff from "./components/LemonadeStandoff"
+import LemonadeStandoff from "./components/LemonadeStandoff";
 
 const App = () => {
   return <LemonadeStandoff />
