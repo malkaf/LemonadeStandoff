@@ -4,12 +4,16 @@ import { CardOrientation } from "../constants";
 import "../styles/styles.scss";
 
 const StandOfArea = (props) => {
-  const { standoffCardsValue, playersName, cardOrientation = CardOrientation.DOWN } = props;
+  const {
+    standoffCardsValue,
+    playersName,
+    cardOrientation = CardOrientation.DOWN,
+  } = props;
   return (
     <div className="standoff-area-wrapper">
       <div className="standoff-area-card-wrapper">
         {standoffCardsValue.map((value, i) => (
-          <Card key={i} cardOrientation={cardOrientation} value={value}/>
+          <Card key={i} cardOrientation={cardOrientation} value={value} />
         ))}
       </div>
       <div className="standoff-area-text-wrapper">
@@ -21,4 +25,4 @@ const StandOfArea = (props) => {
   );
 };
 
-export default StandOfArea
+export default StandOfArea;

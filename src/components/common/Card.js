@@ -32,15 +32,25 @@ const useStyles = makeStyles((theme) => {
 });
 
 const CardContanier = (props) => {
-  const { cardOrientation, value, showShadow = true, style, onClick, disable } = props;
+  const {
+    cardOrientation,
+    value,
+    showShadow = true,
+    style,
+    onClick,
+    disable,
+  } = props;
   const classes = useStyles();
+  
   return (
     <Card
-      data-testid='card'
+      data-testid="card"
       style={style}
       onClick={() => onClick?.(value)}
       className={classNames(classes[cardOrientation], classes.root, {
-        "class-card-shadow": showShadow, "class-disabled": disable})}
+        "class-card-shadow": showShadow,
+        "class-disabled": disable,
+      })}
     >
       {cardOrientation === CardOrientation.UP && (
         <CardContent className={classes.content}>{value}</CardContent>

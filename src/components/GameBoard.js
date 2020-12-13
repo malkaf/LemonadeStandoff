@@ -20,9 +20,9 @@ export default function GameBoard() {
 
   useEffect(() => {
     const endOfGame = (message) => {
-        alert(message);
-        dispatch(reset());
-      };
+      alert(message);
+      dispatch(reset());
+    };
 
     if (newRound) {
       if (deckSizePlayerOne === 0) {

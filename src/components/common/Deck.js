@@ -25,8 +25,7 @@ const Deck = (props) => {
 
   return (
     <div className="deck-wrapper">
-      {isNotSingle &&
-        [...Array(deckSize - 1)].map((_v, i) => createCard(i))}
+      {isNotSingle && [...Array(deckSize - 1)].map((_v, i) => createCard(i))}
       {isDeck && createCard(deckSize - 1)}
     </div>
   );
