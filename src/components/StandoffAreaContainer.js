@@ -8,7 +8,6 @@ import {
   setWarTime,
   selectStandoffAreaCard,
   selectIsWarTime,
-
 } from "../redux/gameStore";
 import "../styles/styles.scss";
 
@@ -19,11 +18,11 @@ const StandoffAreaContainer = () => {
 
   useEffect(() => {
     if (Object.keys(standoffCards).length === 2) {
-      dispatch(setWarTime())
-      // setTimeout(() => {
-      //   dispatch(roundWinnner());
-      //   dispatch(newRoundSetUp());
-      // }, 1000);
+      dispatch(setWarTime());
+      setTimeout(() => {
+        dispatch(roundWinnner());
+        dispatch(newRoundSetUp());
+      }, 1000);
     }
   }, [standoffCards]);
 
