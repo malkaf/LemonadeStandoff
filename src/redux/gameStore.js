@@ -65,6 +65,9 @@ const gameManagerSlice = createSlice({
         state.deck[roundWinner].push(...cardGroup)
       );
       state.deck[roundWinner].push(...Object.values(state.standoffAreaCard));
+      state.drawedCards[PLAYER_ONE] = [];
+      state.drawedCards[PLAYER_TWO] = [];
+      state.standoffAreaCard = {};
       state.deck[roundWinner] = shuffle(state.deck[roundWinner]);
     },
     reset: () => getInitialState(),
@@ -73,9 +76,6 @@ const gameManagerSlice = createSlice({
       state.finishedDrawing[PLAYER_TWO] = false;
       state.playedCard[PLAYER_ONE] = false;
       state.playedCard[PLAYER_TWO] = false;
-      state.drawedCards[PLAYER_ONE] = [];
-      state.drawedCards[PLAYER_TWO] = [];
-      state.standoffAreaCard = {};
       state.isWarTime = false;
       state.newRound = true;
     },
@@ -104,6 +104,6 @@ export const selectNewRound = (state) => state.newRound;
 
 export const selectStandoffAreaCard = (state) => state.standoffAreaCard;
 
-export const selectIsWarTime = (state) => state.isWarTime
+export const selectIsWarTime = (state) => state.isWarTime;
 
 export default gameManagerSlice.reducer;

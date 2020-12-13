@@ -6,9 +6,6 @@ props = {
     cardOrientation: 'faceUp',
     value: 5,
     onClick: jest.fn()
-
-
-
 }
 
 describe('<Card />', () => {

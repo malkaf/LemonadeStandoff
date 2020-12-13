@@ -7,12 +7,12 @@ const StandOfArea = (props) => {
   const { standoffCardsValue, playersName, cardOrientation = CardOrientation.DOWN } = props;
   return (
     <div className="standoff-area-wrapper">
-      <div>
+      <div className="standoff-area-card-wrapper">
         {standoffCardsValue.map((value, i) => (
           <Card key={i} cardOrientation={cardOrientation} value={value}/>
         ))}
       </div>
-      <div>
+      <div className="standoff-area-text-wrapper">
         {playersName.map((name, i) => (
           <div key={i}>{name}</div>
         ))}

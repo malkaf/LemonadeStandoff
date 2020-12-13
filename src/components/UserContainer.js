@@ -6,7 +6,7 @@ import {
   selectDrawedCards,
   selectDeckSize,
   selectFinishedDrawing,
-  selectPlayedCard
+  selectPlayedCard,
 } from "../redux/gameStore";
 import PlayerArea from "./PlayerArea";
 import { CardOrientation, PLAYER_TWO } from "../constants";
@@ -19,7 +19,9 @@ const UserContainer = () => {
   const isFinishedDrawing = useSelector((state) =>
     selectFinishedDrawing(state, PLAYER_TWO)
   );
-  const isCardPlayed = useSelector((state)=> selectPlayedCard(state, PLAYER_TWO))
+  const isCardPlayed = useSelector((state) =>
+    selectPlayedCard(state, PLAYER_TWO)
+  );
   const deckSize = useSelector((state) => selectDeckSize(state, PLAYER_TWO));
 
   return (

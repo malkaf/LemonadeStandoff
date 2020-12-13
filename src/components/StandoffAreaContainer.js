@@ -20,10 +20,10 @@ const StandoffAreaContainer = () => {
   useEffect(() => {
     if (Object.keys(standoffCards).length === 2) {
       dispatch(setWarTime())
-      setTimeout(() => {
-        dispatch(roundWinnner());
-        dispatch(newRoundSetUp());
-      }, 1000);
+      // setTimeout(() => {
+      //   dispatch(roundWinnner());
+      //   dispatch(newRoundSetUp());
+      // }, 1000);
     }
   }, [standoffCards]);
 
