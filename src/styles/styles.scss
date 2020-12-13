@@ -86,6 +86,9 @@ body {
 }
 
 .standoff-area-card-wrapper {
+  & > * {
+    animation: scaling 400ms;
+  }
   display: flex;
   @extend .class-gap;
 }
